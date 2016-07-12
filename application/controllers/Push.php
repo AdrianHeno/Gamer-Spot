@@ -2,26 +2,23 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Push extends CI_Controller {
+	
+	function __construct()
+	{
+	    parent::__construct();
+	    $this->load->model('Push_registration_model');
+	    $this->load->library(array('ion_auth','form_validation'));
+	}
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
 	public function index()
 	{
 		$apiKey = "AIzaSyAixtb0KkjRuN4dXrKJmsmm2RcJSXXkFkQ";
-		$registrationIDs = array("cfltqcKFRPI:APA91bHA73Us3Sczh3Lfwb3MPa2K5mlL6K1XdFvLtOWRtYxng0kL-wbpHm8jEXo7N_LWWcMKJSkwfirg_LGNTyu_6qR0K6esJAL960wK0ZSFHIywWdW66zoMbQMiMp1VK_Al-HyCB60W");
+		$getRegistrationIDs = $this->Push_registration_model->get_all_by_user_id(1);
+		$registrationIDs = array();
+		foreach($getRegistrationIDs as $registrationID){
+			$registrationIDs[] = $registrationID;
+		}
+		
 		$message = "testing Process";
 		$url = 'https://android.googleapis.com/gcm/send';
 		$fields = array(
@@ -45,5 +42,30 @@ class Push extends CI_Controller {
 		if(curl_errno($ch)){ echo 'Curl error: ' . curl_error($ch); }
 		curl_close($ch);
 		echo $result;
+	}
+	//Record that the user has registered for push notifications and record their push id
+	public function register($registration_id){
+		$user = $this->ion_auth->user()->row();
+		$data = array(
+			'user_id' => $user->id,
+			'push_registration_id' => $registration_id,
+			#'created_date' => $this->input->post('created_date',TRUE),
+		);
+
+		$this->Push_registration_model->insert($data);
+	}
+	
+	//Delete users push id
+	//ToDo only delete the id for that device? or all?
+	public function delete($id) 
+	{
+	    $row = $this->Push_registration_model->get_by_id($id);
+    
+	    if ($row) {
+		$this->Push_registration_model->delete($id);
+		return true;
+	    } else {
+		return false;
+	    }
 	}
 }

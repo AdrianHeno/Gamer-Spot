@@ -65,10 +65,15 @@ function unsubscribe() {
     console.log('Error unsubscribing', error);
     subscribeButton.textContent = 'Subscribe';
   });
+  window.alert('Push ID is still in the DB, need to add function to remove this...');
 }
 
 //TODO: Create a place to catch GET
 function sendpoint(endpoint) {
-    xhttp.open("GET", "demo_get2.asp?fname=Henry&lname=Ford", true);
-    xhttp.send();
+  var endpoint_array = endpoint.split("/send/");
+  var split_endpoint = endpoint_array[1];
+  var get_url = "push/register/" + split_endpoint;
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", get_url, true);
+  xhttp.send();
 }
