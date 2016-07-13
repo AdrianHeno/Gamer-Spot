@@ -34,6 +34,8 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('push', function(event) {
   console.log('Push message qweqwe', event);
+  var message = getMessage();
+  console.log(message);
 
   var title = 'Push message title';
 
@@ -49,7 +51,7 @@ function getMessage() {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", get_url, true);
     var message = xhttp.send();
-    console.log(message);
+    return message;
 }
 
 self.addEventListener('notificationclick', function(event) {

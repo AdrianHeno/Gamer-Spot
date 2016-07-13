@@ -171,7 +171,7 @@ class Message extends CI_Controller
 	
 	function get_message(){
 		$row = $this->Message_model->get_most_recent();
-		var_dump($row);
+		echo json_encode($row);
 	}
 
     public function _rules() 
