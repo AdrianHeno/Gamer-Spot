@@ -28,6 +28,17 @@ class Message_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
+	
+	// get most recent
+    function get_most_recent()
+    {
+		$sql = 'SELECT * FROM message ORDER BY `id` DESC LIMIT 1';
+		$query = $this->db->query($sql);
+		return $query->result();
+        #$this->db->order_by($this->id, $this->order);
+		#$this->db->limit(1);
+        #return $this->db->get($this->table)->result();
+    }
     
     // get total rows
     function total_rows($q = NULL) {

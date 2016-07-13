@@ -9,7 +9,11 @@ class Message extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Message_model');
-        $this->load->library('form_validation');
+        $this->load->library(array('ion_auth', 'form_validation'));
+		if (!$this->ion_auth->logged_in())
+		{
+			redirect('auth/login');
+		}
     }
 
     public function index()
@@ -76,7 +80,7 @@ class Message extends CI_Controller
 	    'icon' => set_value('icon'),
 	    'tag' => set_value('tag'),
 	    'data' => set_value('data'),
-	    'created_date' => set_value('created_date'),
+	    #'created_date' => set_value('created_date'),
 	);
         $this->load->view('message_form', $data);
     }
@@ -164,6 +168,11 @@ class Message extends CI_Controller
             redirect(site_url('message'));
         }
     }
+	
+	function get_message(){
+		$row = $this->Message_model->get_most_recent();
+		var_dump($row);
+	}
 
     public function _rules() 
     {
@@ -173,7 +182,7 @@ class Message extends CI_Controller
 	$this->form_validation->set_rules('icon', 'icon', 'trim|required');
 	$this->form_validation->set_rules('tag', 'tag', 'trim|required');
 	$this->form_validation->set_rules('data', 'data', 'trim|required');
-	$this->form_validation->set_rules('created_date', 'created date', 'trim|required');
+	$this->form_validation->set_rules('created_date', 'created date', 'trim');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

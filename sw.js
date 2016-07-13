@@ -44,6 +44,14 @@ self.addEventListener('push', function(event) {
     }));
 });
 
+function getMessage() {
+    var get_url = "message/get_message";
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", get_url, true);
+    var message = xhttp.send();
+    console.log(message);
+}
+
 self.addEventListener('notificationclick', function(event) {
   console.log('Notification click: tag', event.notification.tag);
   // Android doesn't close the notification when you click it
