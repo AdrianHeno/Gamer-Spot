@@ -34,8 +34,9 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('push', function(event) {
   console.log('Push message qweqwe', event);
-  var message = getMessage();
-  console.log('zxc' + message);
+  //var message = getMessage();
+  window.alert('asd');
+  //console.log('zxc' + message);
 
   var title = 'Push message title';
 
@@ -46,13 +47,13 @@ self.addEventListener('push', function(event) {
     }));
 });
 
-function getMessage() {
+/*function getMessage() {
     var get_url = "message/get_message";
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", get_url, true);
     var message = xhttp.send();
     return message;
-}
+}*/
 
 self.addEventListener('notificationclick', function(event) {
   console.log('Notification click: tag', event.notification.tag);

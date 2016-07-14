@@ -21,7 +21,7 @@ class Push extends CI_Controller {
 		}
 		
 
-		
+		#$registrationIDs = array('flz-Ru86Cl8:APA91bHTZIQnPQqvbTOG-lfo_8UBq8nk16AIsytaXEmXGxNKKN2VNyPFwwylCnigwNIalTpQT4u50ncTPctFi9OsHTuk6gCrO9Sa3T5TgSpGmWIPkCYX6pIFUtLmLfAnNIMR0yJYBITg');
 		$message = "testing Process";
 		$url = 'https://android.googleapis.com/gcm/send';
 		$fields = array(
