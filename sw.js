@@ -35,7 +35,7 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('push', function(event) {
   console.log('Push message qweqwe', event);
   var message = getMessage();
-  console.log(message);
+  console.log('zxc' + message);
 
   var title = 'Push message title';
 

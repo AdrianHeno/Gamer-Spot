@@ -14,13 +14,13 @@ class Push extends CI_Controller {
 	{
 		$apiKey = "AIzaSyAixtb0KkjRuN4dXrKJmsmm2RcJSXXkFkQ";
 		$getRegistrationIDs = $this->Push_registration_model->get_all_by_user_id(1);
-		
+
 		$registrationIDs = array();
 		foreach($getRegistrationIDs as $registrationID){
-			$registrationIDs[] = $registrationID;
+			$registrationIDs[] = $registrationID->push_registration_id;
 		}
 		
-		
+
 		
 		$message = "testing Process";
 		$url = 'https://android.googleapis.com/gcm/send';

@@ -35,7 +35,7 @@ class Push_registration_model extends CI_Model
 		$this->db->select('push_registration_id');
         $this->db->where('user_id', $user_id);
 		$this->db->order_by($this->id, $this->order);
-        return $this->db->get($this->table)->row();
+        return $this->db->get($this->table)->result();
     }
     
     // get total rows

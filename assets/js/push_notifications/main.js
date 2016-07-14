@@ -68,7 +68,7 @@ function unsubscribe() {
   window.alert('Push ID is still in the DB, need to add function to remove this...');
 }
 
-//TODO: Create a place to catch GET
+
 function sendpoint(endpoint) {
   var endpoint_array = endpoint.split("/send/");
   var split_endpoint = endpoint_array[1];
