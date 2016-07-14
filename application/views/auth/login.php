@@ -18,7 +18,7 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="youplay-input form-group"><p>
+                <div class="youplay-input form-group">
                   <?php echo form_input($password);?>
                 </div>
               </div>
@@ -31,7 +31,7 @@
                 <!--/div-->
               </div>
             </div>
-            <?php echo form_submit('submit', lang('login_submit_btn'));?>
+            <?php echo form_submit($submit, lang('login_submit_btn'));?>
           
           <?php echo form_close();?>
           

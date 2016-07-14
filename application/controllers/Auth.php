@@ -91,7 +91,12 @@ class Auth extends CI_Controller {
 				'type' => 'password',
 				'placeholder' => 'Password',
 			);
-
+			
+			$this->data['submit'] = array('name' => 'submit',
+				'class'   => 'btn btn-default',
+				'type' => 'submit',
+			);
+			
 			$this->_render_page('auth/login', $this->data);
 		}
 	}
